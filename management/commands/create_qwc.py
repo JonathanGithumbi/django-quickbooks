@@ -44,11 +44,11 @@ class Command(BaseCommand):
         app_name = input('app_name: Default[Weltlink TMS] ') or 'Weltlink TMS'
         app_id = input('app_id: Default[] ') or ''
         app_url = input(
-            'app_url: Default[http://localhost:8000/qwc/] ') or 'http://localhost:8000/qwc/'
+            'app_url: Default[http://localhost:8000/qwc/quickbooks-desktop/] ') or 'http://localhost:8000/qwc/quickbooks-desktop/'
         app_desc = input(
             'app_desc: Default[Weltlink TMS Description] ') or 'Weltlink TMS Description'
         app_support = input(
-            'app_support: Default[http://localhost:8000/qwc/support/] ') or 'http://localhost:8000/qwc/support/'
+            'app_support: Default[http://localhost:8000/qwc/quickbooks-desktop/support/] ') or 'http://localhost:8000/qwc/quickbooks-desktop/support/'
         owner_id = input(
             'owner_id: Default[{55a9fd50-79e9-44e4-8fef-98411c2e8785}] ') or '{55a9fd50-79e9-44e4-8fef-98411c2e8785}'
         file_id = input(
