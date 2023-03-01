@@ -39,7 +39,7 @@ def xml_setter(name, value, encode=False, **options):
 
 
 def get_xml_meta_info():
-    return '<?xml version="1.0"?><?qbxml version="13.0"?>'
+    return '<?xml version="1.0" encoding="utf-8"?><?qbxml version="12.0"?>'
 
 
 def random_string(length=10):
