@@ -178,8 +178,6 @@ class QuickBooksService(ServiceBase):
         print('strHCPResponse', strHCPResponse)
         print('strCompanyFileName', strCompanyFileName)
         print('qbXMLCountry', qbXMLCountry)
-        #Outputting the qbXML so tat i can check the stream for errors
-        print(session_manager.get_request(ticket))
         return session_manager.get_request(ticket)
 
     @rpc(Unicode, Unicode, _returns=Unicode)
