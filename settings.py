@@ -38,10 +38,11 @@ DEFAULTS = {
     'APP_DESCRIPTION': 'Some App Description',
     'QB_TYPE': 'QBFS',
     'OWNER_ID': '{1ee58da6-3051-11ea-b499-9cda3ea7afc1}',
-
+    # Am i the one who's supposed to add Local model Classes?YES
+    # Make sure you use the whole
     'LOCAL_MODEL_CLASSES': {
-        'Invoice': '',
-        'Customer': '',
+        'Invoice': 'invoice.models.Invoice',
+        'Customer': 'student.models.Student',
     }
 }
 
@@ -119,6 +120,7 @@ class QBWCSettings(object):
 
         if attr == 'LOCAL_MODEL_CLASSES':
             for key, value in val.items():
+                # So the import_from_string expects a key:value pair
                 val[key] = import_from_string(value, value)
 
         setattr(self, attr, val)

@@ -2,9 +2,11 @@ from django_quickbooks import QUICKBOOKS_ENUMS, qbwc_settings
 from django_quickbooks.objects.customer import Customer
 from django_quickbooks.processors.base import ResponseProcessor, ResponseProcessorMixin
 
+#The local model class to use for creating and finding objects. :type: Model
+#LocalCustomer should point to Student model
 LocalCustomer = qbwc_settings.LOCAL_MODEL_CLASSES['Customer']
 
-
+print("Hello")
 class CustomerQueryResponseProcessor(ResponseProcessor, ResponseProcessorMixin):
     resource = QUICKBOOKS_ENUMS.RESOURCE_CUSTOMER
     op_type = QUICKBOOKS_ENUMS.OPP_QR

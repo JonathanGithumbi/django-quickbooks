@@ -22,7 +22,8 @@ class QuickBooksService(ServiceBase):
         """
         print('authenticate()')
         return_array = []
-        realm = session_manager.authenticate(username=strUserName, password=strPassword)
+        realm = session_manager.authenticate(
+            username=strUserName, password=strPassword)
         if realm and realm.is_active:
             realm_authenticated.send(sender=realm.__class__, realm=realm)
             if not session_manager.in_session(realm):
@@ -87,7 +88,8 @@ class QuickBooksService(ServiceBase):
         @return string value "done" to indicate web service is finished or the full path of the different company for
         retrying _set_connection.
         """
-        print('connectionError(): ticket=%s, hresult=%s, message=%s' % (ticket, hresult, message))
+        print('connectionError(): ticket=%s, hresult=%s, message=%s' %
+              (ticket, hresult, message))
         session_manager.clear_ticket(ticket)
         return QBWC_CODES.CONN_CLS_ERR
 
@@ -115,7 +117,8 @@ class QuickBooksService(ServiceBase):
 
         @return string message string describing the server version and any other information that user may want to see
         """
-        print('getServerVersion(): version=%s' % HIGHEST_SUPPORTING_QBWC_VERSION)
+        print('getServerVersion(): version=%s' %
+              HIGHEST_SUPPORTING_QBWC_VERSION)
         return HIGHEST_SUPPORTING_QBWC_VERSION
 
     @rpc(Unicode, _returns=Unicode)
@@ -168,7 +171,7 @@ class QuickBooksService(ServiceBase):
         if hresult:
             print("hresult=" + hresult)
             print("message=" + message)
-
+    
         return session_manager.process_response(ticket, response, hresult, message)
 
     @rpc(Unicode, Unicode, Unicode, Unicode, Integer, Integer, _returns=String)
