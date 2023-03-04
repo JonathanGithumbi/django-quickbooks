@@ -48,6 +48,7 @@ class BaseObject(ABC):
     def as_xml(self, class_name=None, indent=0, opp_type=QUICKBOOKS_ENUMS.OPP_ADD,
                version=QUICKBOOKS_ENUMS.VERSION_13, **kwargs):
         xml = ''
+        #
         for field_key, options in self.fields.items():
             if hasattr(self, field_key):
                 obj = getattr(self, field_key)

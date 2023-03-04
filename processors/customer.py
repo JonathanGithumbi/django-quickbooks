@@ -6,7 +6,6 @@ from django_quickbooks.processors.base import ResponseProcessor, ResponseProcess
 #LocalCustomer should point to Student model
 LocalCustomer = qbwc_settings.LOCAL_MODEL_CLASSES['Customer']
 
-print("Hello")
 class CustomerQueryResponseProcessor(ResponseProcessor, ResponseProcessorMixin):
     resource = QUICKBOOKS_ENUMS.RESOURCE_CUSTOMER
     op_type = QUICKBOOKS_ENUMS.OPP_QR

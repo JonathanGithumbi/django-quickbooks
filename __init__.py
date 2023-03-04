@@ -24,7 +24,7 @@ class QBWC_CODES:
 
 
 class QUICKBOOKS_ENUMS:
-    VERSION_13 = 13
+    VERSION_13 = 12
     OPP_ADD = 'Add'
     OPP_MOD = 'Mod'
     OPP_QR = 'Query'

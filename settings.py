@@ -39,7 +39,7 @@ DEFAULTS = {
     'QB_TYPE': 'QBFS',
     'OWNER_ID': '{1ee58da6-3051-11ea-b499-9cda3ea7afc1}',
     # Am i the one who's supposed to add Local model Classes?YES
-    # Make sure you use the whole
+    # Make sure you use the whole path
     'LOCAL_MODEL_CLASSES': {
         'Invoice': 'invoice.models.Invoice',
         'Customer': 'student.models.Student',

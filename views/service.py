@@ -171,7 +171,7 @@ class QuickBooksService(ServiceBase):
         if hresult:
             print("hresult=" + hresult)
             print("message=" + message)
-    
+
         return session_manager.process_response(ticket, response, hresult, message)
 
     @rpc(Unicode, Unicode, Unicode, Unicode, Integer, Integer, _returns=String)

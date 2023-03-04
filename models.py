@@ -44,7 +44,8 @@ class RealmMixin(models.Model):
 
 
 class RealmSessionMixin(models.Model):
-    id = models.UUIDField(verbose_name='Ticket for QBWC session', primary_key=True, editable=False, default=uuid1)
+    id = models.UUIDField(verbose_name='Ticket for QBWC session',
+                          primary_key=True, editable=False, default=uuid1)
     created_at = models.DateTimeField(auto_now_add=True)
     ended_at = models.DateTimeField(null=True)
 
@@ -59,7 +60,8 @@ class QBDTaskMixin(models.Model):
     qb_operation = models.CharField(max_length=25)
     qb_resource = models.CharField(max_length=50)
     object_id = models.CharField(max_length=50, null=True)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
+    content_type = models.ForeignKey(
+        ContentType, on_delete=models.CASCADE, null=True)
     content_object = GenericForeignKey()
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -78,13 +80,13 @@ class QBDTaskMixin(models.Model):
         elif not obj:
             raise ObjectDoesNotExist
         elif self.qb_operation == QUICKBOOKS_ENUMS.OPP_MOD:
-            return service.update(obj.to_qbd_obj())
+            return service.update(obj.to_qbd_obj(op='mod'))
         elif self.qb_operation == QUICKBOOKS_ENUMS.OPP_ADD:
-            return service.add(obj.to_qbd_obj())
+            return service.add(obj.to_qbd_obj(op='add'))
         elif self.qb_operation == QUICKBOOKS_ENUMS.OPP_DEL:
-            return service.delete(obj.to_qbd_obj())
+            return service.delete(obj.to_qbd_obj(op='del'))
         elif self.qb_operation == QUICKBOOKS_ENUMS.OPP_VOID:
-            return service.void(obj.to_qbd_obj())
+            return service.void(obj.to_qbd_obj(op='void'))
         else:
             raise QBOperationNotFound
 
@@ -106,23 +108,27 @@ class Realm(RealmMixin):
 
 
 class RealmSession(RealmSessionMixin):
-    realm = models.ForeignKey(Realm, on_delete=models.CASCADE, related_name='sessions')
+    realm = models.ForeignKey(
+        Realm, on_delete=models.CASCADE, related_name='sessions')
 
     class Meta:
         abstract = False
 
 
 class QBDTask(QBDTaskMixin):
-    realm = models.ForeignKey(Realm, on_delete=models.CASCADE, related_name='qb_tasks')
+    realm = models.ForeignKey(
+        Realm, on_delete=models.CASCADE, related_name='qb_tasks')
 
     class Meta:
         abstract = False
 
 
 class QBDModelMixin(models.Model):
-    qbd_object_id = models.CharField(max_length=127, unique=True, null=True, editable=False)
+    qbd_object_id = models.CharField(
+        max_length=127, unique=True, null=True, editable=False)
     qbd_object_updated_at = models.DateTimeField(null=True, editable=False)
-    qbd_object_version = models.CharField(max_length=127, null=True, editable=False)
+    qbd_object_version = models.CharField(
+        max_length=127, null=True, editable=False)
 
     class Meta:
         abstract = True
@@ -132,7 +138,7 @@ class QBDModelMixin(models.Model):
         return self.qbd_object_id and self.qbd_object_version
 
     @abstractmethod
-    def to_qbd_obj(self, **fields):
+    def to_qbd_obj(self, op='', **fields):
         pass
 
     @classmethod
@@ -181,7 +187,8 @@ def create_qwc(realm, **kwargs):
 
     msg = etree.SubElement(root, 'Scheduler')
 
-    schedule_n_minutes = kwargs.pop('schedule_n_minutes', qbwc_settings.MINIMUM_RUN_EVERY_NMINUTES)
+    schedule_n_minutes = kwargs.pop(
+        'schedule_n_minutes', qbwc_settings.MINIMUM_RUN_EVERY_NMINUTES)
     n_minutes = etree.SubElement(msg, 'RunEveryNMinutes')
     n_minutes.text = str(schedule_n_minutes)
 
