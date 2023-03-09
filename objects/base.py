@@ -28,7 +28,8 @@ class BaseObject(ABC):
         # FIXME: ValidationError handling still seems clumsy, need to reviewed
         for field_name, value in kwargs.items():
             try:
-                self.validator.validate(field_name, value, **self.fields[field_name])
+                self.validator.validate(
+                    field_name, value, **self.fields[field_name])
                 setattr(self, field_name, value)
             except ValidationError as exc:
                 errors.append(exc.detail)
@@ -42,11 +43,23 @@ class BaseObject(ABC):
             if not hasattr(self, field_name):
                 setattr(self,
                         field_name,
-                        _default_value_setter(field_name, self.fields[field_name]['validator']['type'])
+                        _default_value_setter(
+                            field_name, self.fields[field_name]['validator']['type'])
                         )
 
     def as_xml(self, class_name=None, indent=0, opp_type=QUICKBOOKS_ENUMS.OPP_ADD,
                version=QUICKBOOKS_ENUMS.VERSION_13, **kwargs):
+        """This code defines a method called as_xml which is a part of a class. The purpose of this method is to convert the object of the class into an XML format. The method takes a few arguments like class_name, indent, opp_type, version, and some additional keyword arguments.
+
+The method first initializes an empty string called xml which will later contain the XML representation of the object. It then iterates over each field of the object using a for loop. For each field, it checks if the object has the attribute corresponding to that field. If not, it skips that field.
+
+If the field contains a primitive value, the method converts the value into a string and adds an XML element to xml using the xml_setter function. This function sets the XML element with the name of the field and the string representation of the value. If the field is a boolean, the string representation of the value is converted to lowercase.
+
+If the field contains a list of elements, the method iterates over each element in the list. If the element is a primitive value, the method follows the same process as before to add an XML element to xml. If the element is an object, the method recursively calls the as_xml method of that object with some modified arguments based on the type of the field. If the field is a reference field, the object's as_xml method is called with the OBJ_REF type of operation. If the field is a change field, the object's as_xml method is called with the opp_type argument that was passed to the method. If the field is a complex field, the object's as_xml method is called with an empty opp_type argument.
+
+If the field contains an object, the method follows the same process as when the element of a list is an object, but the arguments passed to the as_xml method are determined based on the type of the field.
+
+Finally, the class_name, opp_type, and xml are used to create the final XML representation of the object. The class_name and opp_type are combined to create the root element of the XML, and the xml variable contains the XML elements for all the fields of the object. These are then combined using the xml_setter function and returned as the final XML output."""
         xml = ''
         #
         for field_key, options in self.fields.items():
@@ -56,7 +69,8 @@ class BaseObject(ABC):
                     continue
                 if is_primitive(obj):
                     if self.fields[field_key]['validator']['type'] == self.validator.BOOLTYPE:
-                        xml += xml_setter(field_key, str(obj).lower(), encode=True)
+                        xml += xml_setter(field_key,
+                                          str(obj).lower(), encode=True)
                     else:
                         xml += xml_setter(field_key, str(obj), encode=True)
 
@@ -64,9 +78,11 @@ class BaseObject(ABC):
                     for element in obj:
                         if is_primitive(element):
                             if self.fields[field_key]['validator']['type'] == self.validator.BOOLTYPE:
-                                xml += xml_setter(field_key, str(element).lower(), encode=True)
+                                xml += xml_setter(field_key,
+                                                  str(element).lower(), encode=True)
                             else:
-                                xml += xml_setter(field_key, str(element), encode=True)
+                                xml += xml_setter(field_key,
+                                                  str(element), encode=True)
                         else:
                             if field_key in kwargs.get('ref_fields', []):
                                 xml += element.as_xml(class_name=field_key, indent=indent,
@@ -85,7 +101,8 @@ class BaseObject(ABC):
                         xml += obj.as_xml(class_name=field_key, indent=indent, opp_type=opp_type, version=version,
                                           **kwargs)
                     elif field_key in kwargs.get('complex_fields', []):
-                        xml += obj.as_xml(class_name=field_key, indent=indent, opp_type='', version=version, **kwargs)
+                        xml += obj.as_xml(class_name=field_key, indent=indent,
+                                          opp_type='', version=version, **kwargs)
 
         class_name = self.__class__.__name__ if not class_name else class_name
         xml = xml_setter(class_name + opp_type, xml)
@@ -110,7 +127,8 @@ class BaseObject(ABC):
             field_name = field.tag
             value = None
             if field_name in cls.fields:
-                value = to_internal_value(field, cls.fields[field_name]['validator']['type'])
+                value = to_internal_value(
+                    field, cls.fields[field_name]['validator']['type'])
             elif field_name == 'ParentRef':
                 field_name = 'Parent'
                 value = cls.from_lxml(field)
@@ -119,7 +137,8 @@ class BaseObject(ABC):
                 field_name = field_name[:len(field_name) - 3]
                 if field_name in cls.fields:
                     field.tag = field_name
-                    value = to_internal_value(field, cls.fields[field_name]['validator']['type'])
+                    value = to_internal_value(
+                        field, cls.fields[field_name]['validator']['type'])
             if value:
                 if field_name in cls.fields and cls.fields[field_name].get('many', False):
                     if field_name in obj_data:

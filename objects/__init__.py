@@ -26,6 +26,11 @@ from django_quickbooks.objects.address import \
     ShipAddress
 
 from django_quickbooks.objects.invoice import \
-    ItemService, \
     InvoiceLine, \
     Invoice
+
+from django_quickbooks.objects.itemservice import \
+    ItemService
+
+from django_quickbooks.objects.account import \
+    Account

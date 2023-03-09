@@ -3,19 +3,6 @@ from django_quickbooks.objects.base import BaseObject
 from django_quickbooks.validators import SchemeValidator
 
 
-class ItemService(BaseObject):
-    fields = dict(
-        ListID=dict(validator=dict(type=SchemeValidator.IDTYPE)),
-        Name=dict(validator=dict(type=SchemeValidator.STRTYPE)),
-        FullName=dict(validator=dict(type=SchemeValidator.STRTYPE)),
-        Parent=dict(validator=dict(type=SchemeValidator.OBJTYPE)),
-    )
-
-    @staticmethod
-    def get_service():
-        from django_quickbooks.services.item_service import ServiceOfItemService
-        return ServiceOfItemService
-
 
 class InvoiceLine(BaseObject):
     fields = dict(

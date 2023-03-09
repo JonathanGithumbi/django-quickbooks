@@ -8,8 +8,10 @@ class Customer(BaseObject):
         TimeCreated=dict(validator=dict(type=SchemeValidator.STRTYPE)),
         TimeModified=dict(validator=dict(type=SchemeValidator.STRTYPE)),
         EditSequence=dict(validator=dict(type=SchemeValidator.ESTYPE)),
-        Name=dict(required=False, validator=dict(type=SchemeValidator.STRTYPE)),
-        FullName=dict(required=True, validator=dict(type=SchemeValidator.STRTYPE)),
+        Name=dict(required=False, validator=dict(
+            type=SchemeValidator.STRTYPE)),
+        FullName=dict(required=True, validator=dict(
+            type=SchemeValidator.STRTYPE)),
         IsActive=dict(validator=dict(type=SchemeValidator.BOOLTYPE)),
         CompanyName=dict(validator=dict(type=SchemeValidator.STRTYPE)),
         BillAddress=dict(validator=dict(type=SchemeValidator.OBJTYPE)),
