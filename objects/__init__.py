@@ -34,3 +34,6 @@ from django_quickbooks.objects.itemservice import \
 
 from django_quickbooks.objects.account import \
     Account
+
+from django_quickbooks.objects.salesorpurchase import \
+    SalesOrPurchase
