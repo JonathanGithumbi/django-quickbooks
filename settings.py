@@ -17,13 +17,19 @@ DEFAULTS = {
     'REALM_CONNECTION_DECORATOR': 'django_quickbooks.decorators.base_realm_connection',
 
     'RESPONSE_PROCESSORS': (
-        'django_quickbooks.processors.CustomerQueryResponseProcessor',
-        'django_quickbooks.processors.CustomerModResponseProcessor',
-        'django_quickbooks.processors.CustomerAddResponseProcessor',
-        'django_quickbooks.processors.InvoiceQueryResponseProcessor',
-        'django_quickbooks.processors.InvoiceAddResponseProcessor',
-        'django_quickbooks.processors.InvoiceModResponseProcessor',
-        'django_quickbooks.processors.ItemServiceQueryResponseProcessor',
+        'django_quickbooks.processors.account.AccountModResponseProcessor',
+        'django_quickbooks.processors.account.AccountAddResponseProcessor',
+        'django_quickbooks.processors.account.AccountQueryResponseProcessor',
+        'django_quickbooks.processors.customer.CustomerQueryResponseProcessor',
+        'django_quickbooks.processors.customer.CustomerModResponseProcessor',
+        'django_quickbooks.processors.customer.CustomerAddResponseProcessor',
+        'django_quickbooks.processors.invoice.InvoiceQueryResponseProcessor',
+        'django_quickbooks.processors.invoice.InvoiceAddResponseProcessor',
+        'django_quickbooks.processors.invoice.InvoiceModResponseProcessor',
+        'django_quickbooks.processors.itemservice.ItemServiceAddResponseProcessor',
+        'django_quickbooks.processors.itemservice.ItemServiceModResponseProcessor',
+        'django_quickbooks.processors.salesorpurchase.SalesOrPurchaseAddResponseProcessor',
+        'django_quickbooks.processors.salesorpurchase.SalesOrPurchaseModResponseProcessor',
     ),
 
     'RABBITMQ_DEFAULT_HOST': 'localhost',
@@ -43,6 +49,9 @@ DEFAULTS = {
     'LOCAL_MODEL_CLASSES': {
         'Invoice': 'invoice.models.Invoice',
         'Customer': 'student.models.Student',
+        'ItemService': 'fees_structure.models.BillingItem',
+        'Account': 'account.models.Account',
+        'SalesOrPurchase':'fees_structure.models.SalesOrPurchase'
     }
 }
 

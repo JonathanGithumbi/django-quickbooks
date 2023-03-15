@@ -16,8 +16,10 @@ class QBWC_CODES:
     BUSY = 'busy'  # service is busy with other task
     NVU = 'nvu'  # invalid user is sent to the service
     CC = ''  # indicates current company to use for the web connector to proceed further
-    CONN_CLS_OK = 'ok'  # indicates web connector and web service _set_connection closed successfully
-    CONN_CLS_ERR = 'done'  # indicates web connector failed connecting to web service and finished its job
+    # indicates web connector and web service _set_connection closed successfully
+    CONN_CLS_OK = 'ok'
+    # indicates web connector failed connecting to web service and finished its job
+    CONN_CLS_ERR = 'done'
     INTR_DONE = 'done'  # indicates web connector finished interactive session with web service
     UNEXP_ERR = 'unexpected error'  # unexpected error received from web connector
     CV = ''  # no update needed for web connector to update its version, it can proceed further
@@ -39,14 +41,15 @@ class QUICKBOOKS_ENUMS:
     )
 
     OBJ_REF = 'Ref'
-
+    RESOURCE_ACCOUNT = 'Account'
     RESOURCE_CUSTOMER = 'Customer'
     RESOURCE_VENDOR = 'Vendor'
     RESOURCE_INVOICE = 'Invoice'
     RESOURCE_BILL = 'Bill'
-    RESOURCE_ITEM_SERVICE = 'ItemService'
+    RESOURCE_ITEMSERVICE = 'ItemService'
     RESOURCE_TXN = 'Txn'
-
+    RESOURCE_SALESORPURCHASE='SalesOrPurchase'
+    
 
 class QBXML_RESPONSE_STATUS_CODES:
     OK = '0'
