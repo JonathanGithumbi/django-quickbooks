@@ -99,6 +99,7 @@ class BaseObject(ABC):
 
     @classmethod
     def from_lxml(cls, lxml_obj):
+        import decimal
 
         def to_internal_value(field, type):
             converters = dict(
@@ -108,6 +109,7 @@ class BaseObject(ABC):
                 FLOATTYPE=lambda x: float(x.text),
                 BOOLTYPE=lambda x: bool(x.text),
                 OBJTYPE=lambda x: import_object_cls(x.tag).from_lxml(x),
+                DECIMALTYPE=lambda x: decimal.Decimal(x.text)
             )
             return converters[type](field) if type in converters else None
 

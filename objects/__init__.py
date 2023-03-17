@@ -35,5 +35,14 @@ from django_quickbooks.objects.itemservice import \
 from django_quickbooks.objects.account import \
     Account
 
+from django_quickbooks.objects.account import \
+    Account as ARAccount
+from django_quickbooks.objects.account import \
+    Account as DepositToAccount
+
 from django_quickbooks.objects.salesorpurchase import \
     SalesOrPurchase
+
+from django_quickbooks.objects.receivepayment import \
+    ReceivePayment
+
