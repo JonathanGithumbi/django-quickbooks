@@ -4,7 +4,7 @@ from django_quickbooks.services.base import Service
 
 class ItemServiceService(Service):
     complex_fields = ['SalesOrPurchase']
-    ref_fields = ['AccountRef']
+    ref_fields = ['Account']
 
     def add(self, object):
         return self._add(QUICKBOOKS_ENUMS.RESOURCE_ITEMSERVICE, object)

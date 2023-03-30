@@ -1,3 +1,4 @@
+import decimal
 from django_quickbooks import QUICKBOOKS_ENUMS
 from django_quickbooks.exceptions import VALIDATION_MESSAGES, ValidationCode
 from django_quickbooks.exceptions import ValidationOptionNotFound, ValidationError
@@ -58,12 +59,14 @@ def bool_type_validator(value):
 
 def min_length_validator(value, length):
     if len(value) < length:
-        raise ValidationError(VALIDATION_MESSAGES[ValidationCode.MIN_LENGTH] % length, ValidationCode.MIN_LENGTH)
+        raise ValidationError(
+            VALIDATION_MESSAGES[ValidationCode.MIN_LENGTH] % length, ValidationCode.MIN_LENGTH)
 
 
 def max_length_validator(value, length):
     if len(value) > length:
-        raise ValidationError(VALIDATION_MESSAGES[ValidationCode.MAX_LENGTH] % length, ValidationCode.MAX_LENGTH)
+        raise ValidationError(
+            VALIDATION_MESSAGES[ValidationCode.MAX_LENGTH] % length, ValidationCode.MAX_LENGTH)
 
 
 def float_type_validator(value):
@@ -72,9 +75,16 @@ def float_type_validator(value):
                               ValidationCode.INVALID_TYPE)
 
 
+def decimal_type_validator(value):
+    if not isinstance(value, decimal.Decimal):
+        raise ValidationError(VALIDATION_MESSAGES[ValidationCode.INVALID_TYPE] % (type(value), float),
+                              ValidationCode.INVALID_TYPE)
+
+
 def required_validator(value, required=False):
     if not value and required:
-        raise ValidationError(VALIDATION_MESSAGES[ValidationCode.REQUIRED], ValidationCode.REQUIRED)
+        raise ValidationError(
+            VALIDATION_MESSAGES[ValidationCode.REQUIRED], ValidationCode.REQUIRED)
 
 
 def many_validator(value, many=False):
@@ -90,6 +100,7 @@ class SchemeValidator:
     BOOLTYPE = 'BOOLTYPE'
     OBJTYPE = 'OBJTYPE'
     FLOATTYPE = 'FLOATTYPE'
+    DECIMALTYPE = 'DECIMALTYPE'
 
     type_validators = dict(
         STRTYPE=str_type_validator,
@@ -98,6 +109,7 @@ class SchemeValidator:
         BOOLTYPE=bool_type_validator,
         OBJTYPE=obj_type_validator,
         FLOATTYPE=float_type_validator,
+        DECIMALTYPE=decimal_type_validator
     )
     option_validators = dict(
         min_length=min_length_validator,

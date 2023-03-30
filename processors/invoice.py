@@ -24,7 +24,7 @@ class InvoiceAddResponseProcessor(ResponseProcessor, ResponseProcessorMixin):
             local_invoice = None
 
             if invoice.TxnID:
-                local_invoice = self.find_by_id(invoice.Memo)
+                local_invoice = self.find_by_id(invoice.RefNumber)
 
             if local_invoice:
                 self.update(local_invoice, invoice)

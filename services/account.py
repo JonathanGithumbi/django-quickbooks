@@ -3,7 +3,7 @@ from django_quickbooks.services.base import Service
 
 
 class AccountService(Service):
-    ref_fields = ['CurrencyRef']
+    ref_fields = ['Currency']
 
     def add(self, object):
         return self._add(QUICKBOOKS_ENUMS.RESOURCE_ACCOUNT, object)

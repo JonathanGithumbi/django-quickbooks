@@ -30,6 +30,18 @@ DEFAULTS = {
         'django_quickbooks.processors.itemservice.ItemServiceModResponseProcessor',
         'django_quickbooks.processors.salesorpurchase.SalesOrPurchaseAddResponseProcessor',
         'django_quickbooks.processors.salesorpurchase.SalesOrPurchaseModResponseProcessor',
+        'django_quickbooks.processors.receivepayment.ReceivePaymentAddResponseProcessor',
+        'django_quickbooks.processors.receivepayment.ReceivePaymentModResponseProcessor',
+        'django_quickbooks.processors.vendor.VendorAddResponseProcessor',
+        'django_quickbooks.processors.vendor.VendorModResponseProcessor',
+        'django_quickbooks.processors.bill.BillAddResponseProcessor',
+        'django_quickbooks.processors.bill.BillModResponseProcessor',
+        'django_quickbooks.processors.itemnoninventory.ItemNonInventoryAddResponseProcessor',
+        'django_quickbooks.processors.itemnoninventory.ItemNonInventoryModResponseProcessor',
+        'django_quickbooks.processors.billpaymentcheck.BillPaymentCheckAddResponseProcessor',
+        'django_quickbooks.processors.billpaymentcheck.BillPaymentCheckModResponseProcessor',
+        'django_quickbooks.processors.transfer.TransferAddResponseProcessor',
+        'django_quickbooks.processors.transfer.TransferModResponseProcessor'
     ),
 
     'RABBITMQ_DEFAULT_HOST': 'localhost',
@@ -44,14 +56,19 @@ DEFAULTS = {
     'APP_DESCRIPTION': 'Some App Description',
     'QB_TYPE': 'QBFS',
     'OWNER_ID': '{1ee58da6-3051-11ea-b499-9cda3ea7afc1}',
-    # Am i the one who's supposed to add Local model Classes?YES
-    # Make sure you use the whole path
+
     'LOCAL_MODEL_CLASSES': {
         'Invoice': 'invoice.models.Invoice',
         'Customer': 'student.models.Student',
         'ItemService': 'fees_structure.models.BillingItem',
         'Account': 'account.models.Account',
-        'SalesOrPurchase':'fees_structure.models.SalesOrPurchase'
+        'SalesOrPurchase': 'fees_structure.models.SalesOrPurchase',
+        'ReceivePayment': 'payment.models.Payment',
+        'Vendor': 'vendor.models.Vendor',
+        'Bill': 'bill.models.Bill',
+        'ItemNonInventory' : 'item.models.Item',
+        'BillPaymentCheck': 'bill.models.BillPayment',
+        'Transfer':'account.models.Transfer'
     }
 }
 
