@@ -5,12 +5,18 @@ from django_quickbooks.validators import SchemeValidator
 
 class ItemLine(BaseObject):
     fields = dict(
-        Item=dict(validator=dict(type=SchemeValidator.OBJTYPE)), 
+        Item=dict(validator=dict(type=SchemeValidator.OBJTYPE)),
         Desc=dict(validator=dict(type=SchemeValidator.STRTYPE)),
         Quantity=dict(validator=dict(type=SchemeValidator.DECIMALTYPE)),
         Cost=dict(validator=dict(type=SchemeValidator.DECIMALTYPE)),
         Amount=dict(validator=dict(type=SchemeValidator.DECIMALTYPE)),
     )
+# class ExpenseLine(BaseObject):
+#    fields = dict(
+#        Account=dict(validator=dict(type=SchemeValidator.OBJTYPE)),
+#        Amount=dict(validator=dict(type=SchemeValidator.DECIMALTYPE)),
+#        Memo
+#    )
 
 
 class Bill(BaseObject):

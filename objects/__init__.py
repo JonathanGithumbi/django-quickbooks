@@ -69,3 +69,6 @@ from django_quickbooks.objects.itemnoninventory import \
     ItemNonInventory
 from django_quickbooks.objects.billpaymentcheck import \
     BillPaymentCheck
+from django_quickbooks.objects.creditmemo import \
+    CreditMemo, \
+    CreditMemoLine 
