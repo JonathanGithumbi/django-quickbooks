@@ -41,7 +41,9 @@ DEFAULTS = {
         'django_quickbooks.processors.billpaymentcheck.BillPaymentCheckAddResponseProcessor',
         'django_quickbooks.processors.billpaymentcheck.BillPaymentCheckModResponseProcessor',
         'django_quickbooks.processors.transfer.TransferAddResponseProcessor',
-        'django_quickbooks.processors.transfer.TransferModResponseProcessor'
+        'django_quickbooks.processors.transfer.TransferModResponseProcessor',
+        'django_quickbooks.processors.creditmemo.CreditMemoAddResponseProcessor',
+        'django_quickbooks.processors.creditmemo.CreditMemoModResponseProcessor',
     ),
 
     'RABBITMQ_DEFAULT_HOST': 'localhost',
@@ -66,9 +68,11 @@ DEFAULTS = {
         'ReceivePayment': 'payment.models.Payment',
         'Vendor': 'vendor.models.Vendor',
         'Bill': 'bill.models.Bill',
-        'ItemNonInventory' : 'item.models.Item',
+        'ItemNonInventory': 'item.models.Item',
         'BillPaymentCheck': 'bill.models.BillPayment',
-        'Transfer':'account.models.Transfer'
+        'Transfer': 'account.models.Transfer',
+        'CreditMemo': 'payment.models.CreditMemo',
+        'Grade':'grade.models.Grade'
     }
 }
 
