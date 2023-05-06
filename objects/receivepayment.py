@@ -8,6 +8,11 @@ class AppliedToTxnAdd(BaseObject):
         TxnID=dict(validator=dict(type=SchemeValidator.IDTYPE)),
         PaymentAmount=dict(validator=dict(type=SchemeValidator.DECIMALTYPE)),
     )
+class AppliedToTxnMod(BaseObject):
+    fields = dict(
+        TxnID=dict(validator=dict(type=SchemeValidator.IDTYPE)),
+        PaymentAmount=dict(validator=dict(type=SchemeValidator.DECIMALTYPE)),
+    )
 
 
 class ReceivePayment(BaseObject):
@@ -24,6 +29,7 @@ class ReceivePayment(BaseObject):
         PaymentMethod=dict(validator=dict(type=SchemeValidator.OBJTYPE)),
         DepositToAccount=dict(validator=dict(type=SchemeValidator.OBJTYPE)),
         AppliedToTxnAdd=dict(validator=dict(type=SchemeValidator.OBJTYPE)),
+        AppliedToTxnMod=dict(validator=dict(type=SchemeValidator.OBJTYPE))
     )
 
     @staticmethod

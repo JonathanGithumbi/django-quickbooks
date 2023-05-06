@@ -22,12 +22,19 @@ class InvoiceAddResponseProcessor(ResponseProcessor, ResponseProcessorMixin):
         for invoice_ret in list(self._response_body):
             invoice = self.obj_class.from_lxml(invoice_ret)
             local_invoice = None
-
             if invoice.TxnID:
                 local_invoice = self.find_by_id(invoice.RefNumber)
 
             if local_invoice:
                 self.update(local_invoice, invoice)
+
+                # i need to update my local invoice lines with the txnlineid from the  invoice's InvoiceLine
+                for line_item in invoice.InvoiceLine:
+                    # fetch the local invoice's item line based on the line's description
+                    local_inv_line = local_invoice.items.get(
+                        item__name=line_item.Desc)
+                    local_inv_line.txnlineid = line_item.TxnLineID
+                    local_inv_line.save()
 
         return True
 

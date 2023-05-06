@@ -7,7 +7,7 @@ from django_quickbooks.objects.invoice import Txn
 class BillPaymentCheckService(Service):
     ref_fields = ['PayeeEntity', 'APAccount',
                   'BankAccount']
-    complex_fields = ['AppliedToTxnAdd']
+    complex_fields = ['AppliedToTxnAdd','AppliedToTxnMod']
 
     def add(self, object):
         return self._add(QUICKBOOKS_ENUMS.RESOURCE_BILLPAYMENTCHECK, object)

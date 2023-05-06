@@ -26,11 +26,11 @@ class Invoice(BaseObject):
         ShipAddress=dict(validator=dict(type=SchemeValidator.OBJTYPE)),
         IsPending=dict(validator=dict(type=SchemeValidator.BOOLTYPE)),
         DueDate=dict(validator=dict(type=SchemeValidator.STRTYPE)),
-        Memo=dict(validator=dict(type=SchemeValidator.STRTYPE)),
         RefNumber=dict(validator=dict(type=SchemeValidator.STRTYPE)),
+        Memo=dict(validator=dict(type=SchemeValidator.STRTYPE)),
         InvoiceLine=dict(many=True, validator=dict(
             type=SchemeValidator.OBJTYPE)),
-        
+
     )
 
     @staticmethod

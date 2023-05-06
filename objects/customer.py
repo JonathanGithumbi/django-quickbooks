@@ -1,7 +1,6 @@
 from django_quickbooks.objects.base import BaseObject
 from django_quickbooks.validators import SchemeValidator
 
-
 class Customer(BaseObject):
     fields = dict(
         ListID=dict(validator=dict(type=SchemeValidator.IDTYPE)),
@@ -10,11 +9,12 @@ class Customer(BaseObject):
         EditSequence=dict(validator=dict(type=SchemeValidator.ESTYPE)),
         Name=dict(required=False, validator=dict(
             type=SchemeValidator.STRTYPE)),
+        IsActive=dict(validator=dict(type=SchemeValidator.BOOLTYPE)),
         FullName=dict(required=True, validator=dict(
             type=SchemeValidator.STRTYPE)),
         Class = dict(validator=dict(type=SchemeValidator.OBJTYPE)),
         Parent = dict(validator=dict(type=SchemeValidator.OBJTYPE)),
-        IsActive=dict(validator=dict(type=SchemeValidator.BOOLTYPE)),
+        
         CompanyName=dict(validator=dict(type=SchemeValidator.STRTYPE)),
         BillAddress=dict(validator=dict(type=SchemeValidator.OBJTYPE)),
         ShipAddress=dict(validator=dict(type=SchemeValidator.OBJTYPE)),
@@ -24,6 +24,8 @@ class Customer(BaseObject):
         Email=dict(validator=dict(type=SchemeValidator.STRTYPE)),
         Contact=dict(validator=dict(type=SchemeValidator.STRTYPE)),
         AltContact=dict(validator=dict(type=SchemeValidator.STRTYPE)),
+        JobDesc=dict(validator=dict(type=SchemeValidator.STRTYPE)),
+
     )
 
     def __init__(self, Name=None, IsActive=None, **kwargs):

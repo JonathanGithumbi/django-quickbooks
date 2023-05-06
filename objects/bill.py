@@ -5,6 +5,7 @@ from django_quickbooks.validators import SchemeValidator
 
 class ItemLine(BaseObject):
     fields = dict(
+        TxnLineID=dict(validator=dict(type=SchemeValidator.IDTYPE)),
         Item=dict(validator=dict(type=SchemeValidator.OBJTYPE)),
         Desc=dict(validator=dict(type=SchemeValidator.STRTYPE)),
         Quantity=dict(validator=dict(type=SchemeValidator.DECIMALTYPE)),

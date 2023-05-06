@@ -48,7 +48,7 @@ class QUICKBOOKS_ENUMS:
     RESOURCE_BILL = 'Bill'
     RESOURCE_ITEMSERVICE = 'ItemService'
     RESOURCE_TXN = 'Txn'
-    RESOURCE_SALESORPURCHASE = 'SalesOrPurchase'
+
     RESOURCE_RECEIVEPAYMENT = 'ReceivePayment'
     RESOURCE_VENDOR = 'Vendor'
     RESOURCE_ITEMNONINVENTORY = 'ItemNonInventory'

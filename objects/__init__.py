@@ -32,6 +32,9 @@ from django_quickbooks.objects.invoice import \
 from django_quickbooks.objects.itemservice import \
     ItemService
 
+from django_quickbooks.objects.salesorpurchase import \
+    SalesOrPurchase
+
 from django_quickbooks.objects.account import \
     Account
 
@@ -48,8 +51,6 @@ from django_quickbooks.objects.account import \
 from django_quickbooks.objects.account import \
     Account as TransferToAccount
 
-from django_quickbooks.objects.salesorpurchase import \
-    SalesOrPurchase
 
 from django_quickbooks.objects.receivepayment import \
     ReceivePayment

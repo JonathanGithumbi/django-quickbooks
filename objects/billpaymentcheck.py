@@ -15,6 +15,7 @@ class BillPaymentCheck(BaseObject):
         RefNumber=dict(validator=dict(type=SchemeValidator.STRTYPE)),
         Memo=dict(validator=dict(type=SchemeValidator.STRTYPE)),
         AppliedToTxnAdd=dict(validator=dict(type=SchemeValidator.OBJTYPE)),
+        AppliedToTxnMod=dict(validator=dict(type=SchemeValidator.OBJTYPE)),
     )
 
     @staticmethod
