@@ -33,18 +33,40 @@ class SessionManager(BaseSessionManager, RabbitMQManager):
 
     @method_decorator(realm_connection())
     def add_new_jobs(self, realm=None):
-        queryset = QBDTask.objects.filter(realm=realm).order_by('created_at')
-        for qb_task in queryset:
-        
+
+        # implementing one task per call. to stop concurrent operations on unsynced instances from failing
+        # this is just a stop measure till i can figure out a better alternative
+
+        # oldcode
+        #queryset = QBDTask.objects.filter(realm=realm).order_by('created_at')
+        # for qb_task in queryset:
+        #    try:
+        #        self.publish_message(qb_task.get_request(), str(realm.id))
+        #    except QbException as exc:
+        #        logger.error(exc.detail)
+        #
+        #    except ObjectDoesNotExist as e:
+        #        logger.error(e)
+
+        # queryset.delete()
+
+        # new code
+        #get task
+        task = QBDTask.objects.filter(
+            realm=realm).order_by('created_at').first()
+        if task:
+            #push to queue
             try:
-                self.publish_message(qb_task.get_request(), str(realm.id))
+                self.publish_message(task.get_request(),str(realm.id))
+                #need to get notified when  
             except QbException as exc:
                 logger.error(exc.detail)
-
             except ObjectDoesNotExist as e:
                 logger.error(e)
 
-        queryset.delete()
+            task.delete()
+
+
 
     def new_jobs(self, realm):
         return self.get_queue_message_count(str(realm.id))
